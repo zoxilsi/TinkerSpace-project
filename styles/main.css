@@ -1,16 +1,16 @@
 :root {
-    /* Color Palette - Cosmic Theme */
-    --primary-bg: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b4e 100%);
-    --secondary-bg: rgba(25, 25, 60, 0.8);
-    --accent-primary: #00d4ff;
-    --accent-secondary: #ff6b6b;
-    --accent-tertiary: #4ecdc4;
+    /* Color Palette - Minimalistic Black & White */
+    --primary-bg: #000000;
+    --secondary-bg: rgba(0, 0, 0, 0.05);
+    --accent-primary: #ffffff;
+    --accent-secondary: #ffffff;
+    --accent-tertiary: #ffffff;
     --text-primary: #ffffff;
-    --text-secondary: #b8b8d4;
-    --text-muted: #7a7a9a;
-    --success-color: #2ecc71;
-    --error-color: #e74c3c;
-    --warning-color: #f39c12;
+    --text-secondary: #cccccc;
+    --text-muted: #888888;
+    --success-color: #ffffff;
+    --error-color: #ffffff;
+    --warning-color: #ffffff;
     
     /* Typography */
     --font-primary: 'Orbitron', monospace;
@@ -33,7 +33,7 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.3);
+    --shadow-glow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Reset and Base Styles */
@@ -45,9 +45,9 @@
 
 body {
     font-family: var(--font-secondary);
-    background: var(--primary-bg);
-    color: var(--text-primary);
-    overflow-x: hidden;
+    background: black;
+    color: white;
+    /* overflow-x: hidden; */
     min-height: 100vh;
 }
 
@@ -139,7 +139,7 @@ body {
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 900;
     margin-bottom: var(--spacing-sm);
-    text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
     background: linear-gradient(45deg, var(--accent-primary), var(--accent-tertiary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -147,8 +147,8 @@ body {
 }
 
 .logo .mystery {
-    color: var(--accent-secondary);
-    text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+    color: white;
+    /* text-shadow: 0 0 20px rgba(255, 107, 107, 0.5); */
 }
 
 .tagline {
