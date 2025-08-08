@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyMystery - Memory Keystroke Challenge</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Background Animation -->
+        <div class="background-animation">
+            <div class="floating-key">Q</div>
+            <div class="floating-key">W</div>
+            <div class="floating-key">E</div>
+            <div class="floating-key">R</div>
+            <div class="floating-key">T</div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen active">
+            <div class="logo">
+                <h1>KEY<span class="mystery">MYSTERY</span></h1>
+                <p class="tagline">Unlock Your Mind's Potential</p>
+            </div>
+            
+            <div class="menu-options">
+                <button class="menu-btn primary" onclick="showGameModeSelector()">
+                    <span class="btn-icon">🎮</span>
+                    Start Game
+                </button>
+                <button class="menu-btn" onclick="showInstructions()">
+                    <span class="btn-icon">📖</span>
+                    How to Play
+                </button>
+                <button class="menu-btn" onclick="showStats()">
+                    <span class="btn-icon">📊</span>
+                    Statistics
+                </button>
+                <button class="menu-btn" onclick="showSettings()">
+                    <span class="btn-icon">⚙️</span>
+                    Settings
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Mode Selection -->
+        <div id="game-mode-selector" class="screen">
+            <div class="screen-header">
+                <h2>Choose Your Challenge</h2>
+                <button class="back-btn" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="game-modes">
+                <div class="game-mode-card" onclick="startGame('word-typing')">
+                    <div class="mode-icon">📝</div>
+                    <h3>Word Typing</h3>
+                    <p>Type given words with scrambled keys</p>
+                    <div class="difficulty">Easy • Medium • Hard</div>
+                </div>
+                
+                <div class="game-mode-card" onclick="startGame('memory-recall')">
+                    <div class="mode-icon">🧠</div>
+                    <h3>Memory Recall</h3>
+                    <p>Remember the mapping and type blindly</p>
+                    <div class="difficulty">Medium • Hard</div>
+                </div>
+                
+                <div class="game-mode-card" onclick="startGame('speed-challenge')">
+                    <div class="mode-icon">⚡</div>
+                    <h3>Speed Challenge</h3>
+                    <p>Race against time with changing maps</p>
+                    <div class="difficulty">Hard • Expert</div>
+                </div>
+                
+                <div class="game-mode-card" onclick="startGame('pattern-match')">
+                    <div class="mode-icon">🧩</div>
+                    <h3>Pattern Match</h3>
+                    <p>Complete patterns with mapped keys</p>
+                    <div class="difficulty">Medium • Hard</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="game-info">
+                    <div class="info-item">
+                        <span class="label">Score:</span>
+                        <span id="current-score">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Level:</span>
+                        <span id="current-level">1</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Time:</span>
+                        <span id="timer">60</span>
+                    </div>
+                </div>
+                <button class="pause-btn" onclick="pauseGame()">⏸️</button>
+            </div>
+
+            <!-- Key Mapping Display -->
+            <div id="key-mapping-display" class="key-mapping-display">
+                <h3>Key Mappings</h3>
+                <div id="mapping-grid" class="mapping-grid"></div>
+                <button id="hide-mappings-btn" onclick="toggleMappings()">Hide Mappings</button>
+            </div>
+
+            <!-- Game Content -->
+            <div class="game-content">
+                <div id="challenge-display" class="challenge-display">
+                    <div id="target-word" class="target-word">HELLO</div>
+                    <div id="typed-input" class="typed-input"></div>
+                    <div id="feedback-message" class="feedback-message"></div>
+                </div>
+                
+                <!-- Virtual Keyboard -->
+                <div id="virtual-keyboard" class="virtual-keyboard">
+                    <div class="keyboard-row">
+                        <div class="key" data-key="q">Q</div>
+                        <div class="key" data-key="w">W</div>
+                        <div class="key" data-key="e">E</div>
+                        <div class="key" data-key="r">R</div>
+                        <div class="key" data-key="t">T</div>
+                        <div class="key" data-key="y">Y</div>
+                        <div class="key" data-key="u">U</div>
+                        <div class="key" data-key="i">I</div>
+                        <div class="key" data-key="o">O</div>
+                        <div class="key" data-key="p">P</div>
+                    </div>
+                    <div class="keyboard-row">
+                        <div class="key" data-key="a">A</div>
+                        <div class="key" data-key="s">S</div>
+                        <div class="key" data-key="d">D</div>
+                        <div class="key" data-key="f">F</div>
+                        <div class="key" data-key="g">G</div>
+                        <div class="key" data-key="h">H</div>
+                        <div class="key" data-key="j">J</div>
+                        <div class="key" data-key="k">K</div>
+                        <div class="key" data-key="l">L</div>
+                    </div>
+                    <div class="keyboard-row">
+                        <div class="key" data-key="z">Z</div>
+                        <div class="key" data-key="x">X</div>
+                        <div class="key" data-key="c">C</div>
+                        <div class="key" data-key="v">V</div>
+                        <div class="key" data-key="b">B</div>
+                        <div class="key" data-key="n">N</div>
+                        <div class="key" data-key="m">M</div>
+                    </div>
+                    <div class="keyboard-row">
+                        <div class="key spacebar" data-key=" ">SPACE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Screen -->
+        <div id="instructions" class="screen">
+            <div class="screen-header">
+                <h2>How to Play KeyMystery</h2>
+                <button class="back-btn" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="instructions-content">
+                <div class="instruction-section">
+                    <h3>🎯 Objective</h3>
+                    <p>Master typing with scrambled keyboard mappings to improve memory and adaptability!</p>
+                </div>
+                
+                <div class="instruction-section">
+                    <h3>🔄 How It Works</h3>
+                    <ul>
+                        <li>Each game randomizes your keyboard - pressing 'A' might type 'K'</li>
+                        <li>Study the key mappings shown at the start</li>
+                        <li>Type the target words using the new mappings</li>
+                        <li>Earn points for accuracy and speed</li>
+                    </ul>
+                </div>
+                
+                <div class="instruction-section">
+                    <h3>🎮 Game Modes</h3>
+                    <div class="mode-instructions">
+                        <div><strong>Word Typing:</strong> Type given words with visual keyboard help</div>
+                        <div><strong>Memory Recall:</strong> Type without seeing the mappings</div>
+                        <div><strong>Speed Challenge:</strong> Race against time with changing mappings</div>
+                        <div><strong>Pattern Match:</strong> Complete letter patterns and sequences</div>
+                    </div>
+                </div>
+                
+                <div class="instruction-section">
+                    <h3>💡 Tips</h3>
+                    <ul>
+                        <li>Start with Word Typing mode to learn the mechanics</li>
+                        <li>Pay attention to the key mapping display</li>
+                        <li>Practice makes perfect - your brain will adapt!</li>
+                        <li>Use the virtual keyboard as a visual aid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Screen -->
+        <div id="stats" class="screen">
+            <div class="screen-header">
+                <h2>Your Statistics</h2>
+                <button class="back-btn" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="stats-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-games">0</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="highest-score">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avg-accuracy">0%</div>
+                        <div class="stat-label">Average Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-words">0</div>
+                        <div class="stat-label">Words Typed</div>
+                    </div>
+                </div>
+                
+                <div class="achievements">
+                    <h3>🏆 Achievements</h3>
+                    <div id="achievements-list" class="achievements-list">
+                        <!-- Achievements will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Screen -->
+        <div id="settings" class="screen">
+            <div class="screen-header">
+                <h2>Settings</h2>
+                <button class="back-btn" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="settings-content">
+                <div class="setting-group">
+                    <h3>🎵 Audio</h3>
+                    <label class="setting-item">
+                        <span>Sound Effects</span>
+                        <input type="checkbox" id="sound-effects" checked>
+                    </label>
+                    <label class="setting-item">
+                        <span>Background Music</span>
+                        <input type="checkbox" id="background-music">
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>🎮 Gameplay</h3>
+                    <label class="setting-item">
+                        <span>Show Virtual Keyboard</span>
+                        <input type="checkbox" id="show-keyboard" checked>
+                    </label>
+                    <label class="setting-item">
+                        <span>Mapping Display Duration (seconds)</span>
+                        <input type="range" id="mapping-duration" min="3" max="15" value="8">
+                        <span id="mapping-duration-value">8</span>
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <h3>🎨 Appearance</h3>
+                    <label class="setting-item">
+                        <span>Theme</span>
+                        <select id="theme-select">
+                            <option value="cosmic">Cosmic (Default)</option>
+                            <option value="neon">Neon</option>
+                            <option value="minimal">Minimal</option>
+                        </select>
+                    </label>
+                </div>
+                
+                <div class="setting-group">
+                    <button class="reset-btn" onclick="resetAllData()">
+                        🔄 Reset All Data
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over" class="screen">
+            <div class="game-over-content">
+                <h2>Game Complete!</h2>
+                <div class="final-stats">
+                    <div class="final-score">
+                        <span class="score-label">Final Score</span>
+                        <span id="final-score" class="score-value">0</span>
+                    </div>
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Accuracy:</span>
+                            <span id="game-accuracy">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Words Completed:</span>
+                            <span id="words-completed">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time Played:</span>
+                            <span id="time-played">0s</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-over-actions">
+                    <button class="menu-btn primary" onclick="showGameModeSelector()">
+                        Play Again
+                    </button>
+                    <button class="menu-btn" onclick="showMainMenu()">
+                        Main Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="key-sound" preload="auto">
+        <source src="sounds/key-press.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="success-sound" preload="auto">
+        <source src="sounds/success.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="error-sound" preload="auto">
+        <source src="sounds/error.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/storage.js"></script>
+</body>
+</html>
