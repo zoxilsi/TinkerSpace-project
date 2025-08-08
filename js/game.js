@@ -17,7 +17,6 @@ class GameState {
         this.gameTimer = null;
         this.gameStartTime = null;
         this.isPaused = false;
-        this.showMappings = true;
         this.showKeyboard = true;
     }
 
@@ -32,7 +31,6 @@ class GameState {
         this.correctKeystrokes = 0;
         this.gameStartTime = null;
         this.isPaused = false;
-        this.showMappings = true;
         this.showKeyboard = true;
         if (this.gameTimer) {
             clearInterval(this.gameTimer);
@@ -108,34 +106,6 @@ function generateKeyMapping() {
     gameState.originalMapping[' '] = ' ';
 }
 
-function displayKeyMappings() {
-    const mappingGrid = document.getElementById('mapping-grid');
-    mappingGrid.innerHTML = '';
-
-    // Render rows to mimic a QWERTY keyboard layout with offsets
-    KEYBOARD_LAYOUT.forEach((rowKeys, index) => {
-        const row = document.createElement('div');
-        row.className = `mapping-row row-${index + 1}`;
-
-        rowKeys.forEach(key => {
-            const mappingItem = document.createElement('div');
-            mappingItem.className = 'mapping-item';
-            mappingItem.setAttribute('role', 'group');
-            mappingItem.setAttribute('aria-label', `Key ${key} maps to ${gameState.keyMapping[key.toLowerCase()].toUpperCase()}`);
-
-            mappingItem.innerHTML = `
-                <div class="mapping-key">${key}</div>
-                <div class="mapping-arrow">↓</div>
-                <div class="mapping-value">${gameState.keyMapping[key.toLowerCase()].toUpperCase()}</div>
-            `;
-
-            row.appendChild(mappingItem);
-        });
-
-        mappingGrid.appendChild(row);
-    });
-}
-
 function updateVirtualKeyboard() {
     const keys = document.querySelectorAll('.key');
     keys.forEach(key => {
@@ -192,7 +162,6 @@ function startGame(mode, customTime = null) {
     gameState.gameMode = mode; // Reset clears this, so set it again
     
     generateKeyMapping();
-    displayKeyMappings();
     updateVirtualKeyboard();
     
     gameState.currentWord = getNextWord();
@@ -224,15 +193,6 @@ function startGame(mode, customTime = null) {
     updateGameDisplay();
     showScreen('game-screen');
     startGameTimer();
-    
-    // Hide mappings after some time for certain modes
-    if (mode === 'memory-recall' || mode === 'speed-challenge') {
-        setTimeout(() => {
-            if (gameState.showMappings) {
-                toggleMappings();
-            }
-        }, getSettings().mappingDuration * 1000);
-    }
 }
 
 function startGameTimer() {
@@ -439,21 +399,6 @@ function updateGameDisplay() {
     }
 }
 
-function toggleMappings() {
-    const mappingDisplay = document.getElementById('key-mapping-display');
-    const toggleBtn = document.getElementById('hide-mappings-btn');
-    
-    gameState.showMappings = !gameState.showMappings;
-    
-    if (gameState.showMappings) {
-        mappingDisplay.style.display = 'block';
-        toggleBtn.textContent = 'Hide Mappings';
-    } else {
-        mappingDisplay.style.display = 'none';
-        toggleBtn.textContent = 'Show Mappings';
-    }
-}
-
 function toggleKeyboard() {
     const keyboard = document.getElementById('virtual-keyboard');
     const toggleBtn = document.getElementById('hide-keyboard-btn');
@@ -476,6 +421,16 @@ function toggleKeyboard() {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Modal click outside to close
+    const modal = document.getElementById('how-it-works-modal');
+    if (modal) {
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                cancelGameStart();
+            }
+        });
+    }
+    
     // Keyboard input listener
     document.addEventListener('keydown', function(event) {
         if (gameState.currentScreen === 'game-screen' && !gameState.isPaused) {
@@ -598,8 +553,9 @@ function displayAchievements() {
     });
 }
 
-// Global variables for time selection
+// Global variables for time selection and game configuration
 let selectedGameMode = null;
+let selectedTime = null;
 
 // Function to show time selector with selected game mode
 function showTimeSelector(gameMode) {
@@ -607,15 +563,39 @@ function showTimeSelector(gameMode) {
     showScreen('time-selector');
 }
 
-// Function to start game with selected time
+// Function to show "How It Works" modal before starting game
 function startGameWithTime(timeInSeconds) {
     if (!selectedGameMode) {
         console.error('No game mode selected');
         return;
     }
     
-    // Start the game with the selected mode and time
-    startGame(selectedGameMode, timeInSeconds);
+    // Store the selected time
+    selectedTime = timeInSeconds;
+    
+    // Show the "How It Works" modal
+    const modal = document.getElementById('how-it-works-modal');
+    modal.classList.add('show');
+}
+
+// Function called when user clicks "Start Game" in modal
+function startGameFromModal() {
+    // Hide the modal
+    const modal = document.getElementById('how-it-works-modal');
+    modal.classList.remove('show');
+    
+    // Start the game with stored configuration
+    if (selectedGameMode && selectedTime) {
+        startGame(selectedGameMode, selectedTime);
+    }
+}
+
+// Function called when user clicks "Cancel" in modal
+function cancelGameStart() {
+    // Hide the modal and go back to time selector
+    const modal = document.getElementById('how-it-works-modal');
+    modal.classList.remove('show');
+    showScreen('time-selector');
 }
 
 // Export functions for use in other modules
@@ -624,7 +604,7 @@ window.GameEngine = {
     pauseGame,
     exitToMenu,
     endGame,
-    toggleMappings,
+    toggleKeyboard,
     gameState
 };
 
@@ -632,5 +612,6 @@ window.GameEngine = {
 window.exitToMenu = exitToMenu;
 window.showTimeSelector = showTimeSelector;
 window.startGameWithTime = startGameWithTime;
-window.toggleMappings = toggleMappings;
 window.toggleKeyboard = toggleKeyboard;
+window.startGameFromModal = startGameFromModal;
+window.cancelGameStart = cancelGameStart;

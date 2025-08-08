@@ -110,6 +110,37 @@
             </div>
         </div>
 
+        <!-- How It Works Modal -->
+        <div id="how-it-works-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🔄 How It Works</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="instruction-item">
+                        <span class="instruction-icon">🔀</span>
+                        <p>Each game randomizes your keyboard - pressing 'A' might type 'K'</p>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="instruction-icon">📖</span>
+                        <p>Study the key mappings shown at the start</p>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="instruction-icon">⌨️</span>
+                        <p>Type the target words using the new mappings</p>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="instruction-icon">🏆</span>
+                        <p>Earn points for accuracy and speed</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn primary-btn" onclick="startGameFromModal()">Start Game</button>
+                    <button class="modal-btn secondary-btn" onclick="cancelGameStart()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Game Screen -->
         <div id="game-screen" class="screen">
             <div class="game-header">
@@ -130,15 +161,8 @@
                 <div class="game-controls">
                     <button class="control-btn exit-btn" title="Exit to Menu" onclick="exitToMenu()">Exit</button>
                     <button class="control-btn pause-btn" title="Pause Game" onclick="pauseGame()">Pause</button>
-                    <button class="control-btn mapping-btn" id="hide-mappings-btn" title="Toggle Key Mappings" onclick="toggleMappings()">Hide Mappings</button>
                     <button class="control-btn keyboard-btn" id="hide-keyboard-btn" title="Toggle Virtual Keyboard" onclick="toggleKeyboard()">Hide Keyboard</button>
                 </div>
-            </div>
-
-            <!-- Key Mapping Display -->
-            <div id="key-mapping-display" class="key-mapping-display">
-                <h3>Key Mappings</h3>
-                <div id="mapping-grid" class="mapping-grid"></div>
             </div>
 
             <!-- Game Content -->
