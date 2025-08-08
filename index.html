@@ -55,14 +55,14 @@
             </div>
             
             <div class="game-modes">
-                <div class="game-mode-card" onclick="startGame('word-typing')">
+                <div class="game-mode-card" onclick="showTimeSelector('word-typing')">
                     <!-- <div class="mode-icon">📝</div> -->
                     <h3>Easy</h3>
                     <!-- <p>Type given words with scrambled keys</p> -->
                     <!-- <div class="difficulty">Easy • Medium • Hard</div> -->
                 </div>
                 
-                <div class="game-mode-card" onclick="startGame('memory-recall')">
+                <div class="game-mode-card" onclick="showTimeSelector('memory-recall')">
                     <!-- <div class="mode-icon">🧠</div> -->
                     <h3>Hard</h3>
                     <!-- <p>Remember the mapping and type blindly</p> -->
@@ -85,6 +85,31 @@
             </div>
         </div>
 
+        <!-- Time Selection Screen -->
+        <div id="time-selector" class="screen">
+            <div class="screen-header">
+                <h2>Select Time Duration</h2>
+                <button class="back-btn" onclick="showGameModeSelector()">← Back</button>
+            </div>
+            
+            <div class="game-modes">
+                <div class="game-mode-card" onclick="startGameWithTime(30)">
+                    <h3>30 Seconds</h3>
+                    <p>Quick challenge</p>
+                </div>
+                
+                <div class="game-mode-card" onclick="startGameWithTime(60)">
+                    <h3>60 Seconds</h3>
+                    <p>Standard game</p>
+                </div>
+                
+                <div class="game-mode-card" onclick="startGameWithTime(90)">
+                    <h3>90 Seconds</h3>
+                    <p>Extended play</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Game Screen -->
         <div id="game-screen" class="screen">
             <div class="game-header">
@@ -102,14 +127,18 @@
                         <span id="timer">60</span>
                     </div>
                 </div>
-                <button class="pause-btn" onclick="pauseGame()">⏸️</button>
+                <div class="game-controls">
+                    <button class="control-btn exit-btn" title="Exit to Menu" onclick="exitToMenu()">Exit</button>
+                    <button class="control-btn pause-btn" title="Pause Game" onclick="pauseGame()">Pause</button>
+                    <button class="control-btn mapping-btn" id="hide-mappings-btn" title="Toggle Key Mappings" onclick="toggleMappings()">Hide Mappings</button>
+                    <button class="control-btn keyboard-btn" id="hide-keyboard-btn" title="Toggle Virtual Keyboard" onclick="toggleKeyboard()">Hide Keyboard</button>
+                </div>
             </div>
 
             <!-- Key Mapping Display -->
             <div id="key-mapping-display" class="key-mapping-display">
                 <h3>Key Mappings</h3>
                 <div id="mapping-grid" class="mapping-grid"></div>
-                <button id="hide-mappings-btn" onclick="toggleMappings()">Hide Mappings</button>
             </div>
 
             <!-- Game Content -->

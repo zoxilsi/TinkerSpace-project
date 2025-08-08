@@ -702,3 +702,8 @@ window.UI = {
     exportGameData,
     importGameData
 };
+
+// Make key functions available globally for HTML onclick handlers
+window.showScreen = showScreen;
+window.showMainMenu = showMainMenu;
+window.showGameModeSelector = showGameModeSelector;

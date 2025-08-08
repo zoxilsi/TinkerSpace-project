@@ -18,6 +18,7 @@ class GameState {
         this.gameStartTime = null;
         this.isPaused = false;
         this.showMappings = true;
+        this.showKeyboard = true;
     }
 
     reset() {
@@ -32,6 +33,7 @@ class GameState {
         this.gameStartTime = null;
         this.isPaused = false;
         this.showMappings = true;
+        this.showKeyboard = true;
         if (this.gameTimer) {
             clearInterval(this.gameTimer);
             this.gameTimer = null;
@@ -140,7 +142,15 @@ function updateVirtualKeyboard() {
         const keyValue = key.dataset.key;
         if (keyValue && keyValue !== ' ') {
             const mappedValue = gameState.keyMapping[keyValue];
-            key.innerHTML = `<span style="font-size: 0.8rem; opacity: 0.6;">${keyValue.toUpperCase()}</span><br>${mappedValue ? mappedValue.toUpperCase() : keyValue.toUpperCase()}`;
+            // Show original key small and faded, with the mapped key prominent
+            key.innerHTML = `
+                <div class="key-mapping">
+                    <span class="original-key">${keyValue.toUpperCase()}</span>
+                    <span class="mapped-key">${mappedValue ? mappedValue.toUpperCase() : keyValue.toUpperCase()}</span>
+                </div>
+            `;
+        } else if (keyValue === ' ') {
+            key.innerHTML = 'SPACE';
         }
     });
 }
@@ -176,7 +186,7 @@ function getNextWord() {
 }
 
 // Game logic functions
-function startGame(mode) {
+function startGame(mode, customTime = null) {
     gameState.gameMode = mode;
     gameState.reset();
     gameState.gameMode = mode; // Reset clears this, so set it again
@@ -188,22 +198,27 @@ function startGame(mode) {
     gameState.currentWord = getNextWord();
     gameState.gameStartTime = Date.now();
     
-    // Set initial time based on game mode
-    switch (mode) {
-        case 'word-typing':
-            gameState.timeRemaining = 90;
-            break;
-        case 'memory-recall':
-            gameState.timeRemaining = 120;
-            break;
-        case 'speed-challenge':
-            gameState.timeRemaining = 60;
-            break;
-        case 'pattern-match':
-            gameState.timeRemaining = 75;
-            break;
-        default:
-            gameState.timeRemaining = 60;
+    // Set initial time - use custom time if provided, otherwise use default
+    if (customTime) {
+        gameState.timeRemaining = customTime;
+    } else {
+        // Set default time based on game mode
+        switch (mode) {
+            case 'word-typing':
+                gameState.timeRemaining = 90;
+                break;
+            case 'memory-recall':
+                gameState.timeRemaining = 120;
+                break;
+            case 'speed-challenge':
+                gameState.timeRemaining = 60;
+                break;
+            case 'pattern-match':
+                gameState.timeRemaining = 75;
+                break;
+            default:
+                gameState.timeRemaining = 60;
+        }
     }
     
     updateGameDisplay();
@@ -241,6 +256,20 @@ function pauseGame() {
     gameState.isPaused = !gameState.isPaused;
     const pauseBtn = document.querySelector('.pause-btn');
     pauseBtn.textContent = gameState.isPaused ? '▶️' : '⏸️';
+}
+
+function exitToMenu() {
+    // End the current game
+    if (gameState.gameTimer) {
+        clearInterval(gameState.gameTimer);
+        gameState.gameTimer = null;
+    }
+    
+    // Reset game state
+    gameState.isPaused = false;
+    
+    // Return to main menu
+    showMainMenu();
 }
 
 function endGame() {
@@ -425,6 +454,26 @@ function toggleMappings() {
     }
 }
 
+function toggleKeyboard() {
+    const keyboard = document.getElementById('virtual-keyboard');
+    const toggleBtn = document.getElementById('hide-keyboard-btn');
+    
+    // Initialize keyboard visibility state if not set
+    if (gameState.showKeyboard === undefined) {
+        gameState.showKeyboard = true;
+    }
+    
+    gameState.showKeyboard = !gameState.showKeyboard;
+    
+    if (gameState.showKeyboard) {
+        keyboard.style.display = 'block';
+        toggleBtn.textContent = 'Hide Keyboard';
+    } else {
+        keyboard.style.display = 'none';
+        toggleBtn.textContent = 'Show Keyboard';
+    }
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
     // Keyboard input listener
@@ -549,11 +598,39 @@ function displayAchievements() {
     });
 }
 
+// Global variables for time selection
+let selectedGameMode = null;
+
+// Function to show time selector with selected game mode
+function showTimeSelector(gameMode) {
+    selectedGameMode = gameMode;
+    showScreen('time-selector');
+}
+
+// Function to start game with selected time
+function startGameWithTime(timeInSeconds) {
+    if (!selectedGameMode) {
+        console.error('No game mode selected');
+        return;
+    }
+    
+    // Start the game with the selected mode and time
+    startGame(selectedGameMode, timeInSeconds);
+}
+
 // Export functions for use in other modules
 window.GameEngine = {
     startGame,
     pauseGame,
+    exitToMenu,
     endGame,
     toggleMappings,
     gameState
 };
+
+// Make functions available globally for HTML onclick handlers
+window.exitToMenu = exitToMenu;
+window.showTimeSelector = showTimeSelector;
+window.startGameWithTime = startGameWithTime;
+window.toggleMappings = toggleMappings;
+window.toggleKeyboard = toggleKeyboard;
