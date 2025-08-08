@@ -65,9 +65,6 @@ For Software:
 
 <img width="1920" height="989" alt="Screenshot from 2025-08-09 02-46-01" src="https://github.com/user-attachments/assets/ff59d29d-6c57-435e-b4e5-856323576322" />
 
-# Diagrams
-![Game Flow](diagrams/game-workflow.png)
-*Complete user flow from main menu through difficulty selection, time selection, instructions, and gameplay*
 
 ## Key Features
 - 🔀 **Randomized Keyboard Mappings**: Every game scrambles key positions
