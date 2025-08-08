@@ -4,9 +4,8 @@
 ### Team Name: KeyMasters
 
 ### Team Members
-- Team Lead: [Your Name] - [Your College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Member 1: ABHIJITH T - RIT KOTTAYAM
+- Member 2: AMALNATH - RIT KOTTAYAM
 
 ### Project Description
 KeyMystery is a web-based typing challenge game that scrambles your keyboard mappings to test memory, adaptability, and typing skills. Players must learn new key combinations on-the-fly while racing against time to type target words accurately.
@@ -53,17 +52,18 @@ http://localhost:8000
 For Software:
 
 # Screenshots (Add at least 3)
-![Main Menu](screenshots/main-menu.png)
+<img width="1920" height="989" alt="Screenshot from 2025-08-09 02-45-12" src="https://github.com/user-attachments/assets/54ad9ecf-9cb5-433a-b302-fcb3879bdf0c" />
 *Main menu with cosmic theme showing game title and navigation options*
 
-![Game Instructions](screenshots/instructions-modal.png)
+
+<img width="1920" height="989" alt="Screenshot from 2025-08-09 03-11-31" src="https://github.com/user-attachments/assets/7bd63c49-0e5a-4009-b6a6-e77d4aa9e1a2" />
+
 *Compact black and white instructional modal explaining game mechanics before start*
+<img width="1920" height="989" alt="Screenshot from 2025-08-09 02-45-21" src="https://github.com/user-attachments/assets/45128003-c802-4f34-abff-6a96686a89e9" />
 
-![Active Gameplay](screenshots/gameplay-screen.png)
-*Game screen showing scrambled keyboard mappings, target word, and user input with timer*
+<img width="1920" height="989" alt="Screenshot from 2025-08-09 02-46-10" src="https://github.com/user-attachments/assets/3d37602d-ac8a-4e1b-b9bc-595f69f8af55" />
 
-![Virtual Keyboard](screenshots/virtual-keyboard.png)
-*Virtual keyboard display showing original keys mapped to scrambled outputs*
+<img width="1920" height="989" alt="Screenshot from 2025-08-09 02-46-01" src="https://github.com/user-attachments/assets/ff59d29d-6c57-435e-b4e5-856323576322" />
 
 # Diagrams
 ![Game Flow](diagrams/game-workflow.png)
@@ -94,18 +94,12 @@ For Software:
 [Add your demo video link here - showing gameplay, scrambled typing, and UI interactions]
 *Video demonstrates the complete game flow, keyboard scrambling mechanics, and responsive design*
 
-# Live Demo
-🌐 **Play Now**: [https://zoxilsi.github.io/TinkerSpace-project/](https://zoxilsi.github.io/TinkerSpace-project/)
 
 # Additional Demos
 - Interactive tutorial walkthrough
 - Mobile responsiveness demonstration
 - Accessibility features showcase
 
-## Team Contributions
-- [Name 1]: Frontend development, game logic implementation, UI/UX design
-- [Name 2]: Keyboard mapping algorithms, scoring system, audio implementation  
-- [Name 3]: Responsive design, testing, documentation, deployment
 
 ## Why This Project is Beautifully Useless
 - ✅ Makes typing unnecessarily complicated
