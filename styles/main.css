@@ -140,9 +140,9 @@ body {
     font-weight: 900;
     margin-bottom: var(--spacing-sm);
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-tertiary));
+    background: linear-gradient(45deg);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* -webkit-text-fill-color: transparent; */
     background-clip: text;
 }
 
@@ -153,7 +153,7 @@ body {
 
 .tagline {
     font-size: 1.2rem;
-    color: var(--text-secondary);
+    /* color: var(--text-secondary); */
     margin-bottom: var(--spacing-xl);
     font-weight: 300;
 }
@@ -182,26 +182,26 @@ body {
     transition: all 0.3s ease;
     background: var(--secondary-bg);
     color: var(--text-primary);
-    border: 1px solid rgba(0, 212, 255, 0.3);
+    border: 1px solid rgb(255, 255, 255);
     backdrop-filter: blur(10px);
 }
 
 .menu-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-glow);
-    border-color: var(--accent-primary);
+    /* border-color: var(--accent-primary); */
 }
 
 .menu-btn.primary {
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-tertiary));
-    color: var(--primary-bg);
+    background: linear-gradient(45deg);
+    /* color: var(--primary-bg); */
     font-weight: 600;
     box-shadow: var(--shadow-md);
 }
 
 .menu-btn.primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.4);
+    /* box-shadow: 0 8px 32px rgb(255, 255, 255); */
 }
 
 .btn-icon {
@@ -215,20 +215,20 @@ body {
     align-items: center;
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 .screen-header h2 {
     font-family: var(--font-primary);
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .back-btn {
     padding: var(--spacing-sm) var(--spacing-md);
     background: var(--secondary-bg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     cursor: pointer;
@@ -238,7 +238,7 @@ body {
 
 .back-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--accent-primary);
+    /* border-color: var(--accent-primary); */
 }
 
 /* Game Mode Selector */
@@ -264,7 +264,7 @@ body {
 .game-mode-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-glow);
-    border-color: var(--accent-primary);
+    /* border-color: var(--accent-primary); */
 }
 
 .mode-icon {
@@ -276,7 +276,7 @@ body {
     font-family: var(--font-primary);
     font-size: 1.5rem;
     margin-bottom: var(--spacing-sm);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .game-mode-card p {
@@ -326,7 +326,7 @@ body {
     font-family: var(--font-primary);
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .pause-btn {
@@ -358,7 +358,7 @@ body {
 .key-mapping-display h3 {
     font-family: var(--font-primary);
     margin-bottom: var(--spacing-md);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .mapping-grid {
@@ -396,22 +396,22 @@ body {
 .mapping-value {
     font-family: var(--font-primary);
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 #hide-mappings-btn {
     padding: var(--spacing-sm) var(--spacing-md);
     background: transparent;
-    border: 1px solid var(--accent-primary);
+    border: 1px solid;
     border-radius: var(--radius-sm);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9rem;
 }
 
 #hide-mappings-btn:hover {
-    background: var(--accent-primary);
+    /* background: var(--accent-primary); */
     color: var(--primary-bg);
 }
 
@@ -436,7 +436,7 @@ body {
     font-family: var(--font-primary);
     font-size: clamp(2rem, 6vw, 4rem);
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
     margin-bottom: var(--spacing-lg);
     letter-spacing: 0.2em;
     text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
@@ -458,7 +458,7 @@ body {
 .typed-input::after {
     content: '|';
     animation: blink 1s infinite;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 @keyframes blink {
@@ -518,12 +518,12 @@ body {
 
 .key:hover {
     background: rgba(0, 212, 255, 0.1);
-    border-color: var(--accent-primary);
+    /* border-color: var(--accent-primary); */
     transform: translateY(-2px);
 }
 
 .key.active {
-    background: var(--accent-primary);
+    /* background: var(--accent-primary); */
     color: var(--primary-bg);
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
@@ -551,7 +551,7 @@ body {
 
 .instruction-section h3 {
     font-family: var(--font-primary);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
     margin-bottom: var(--spacing-md);
     font-size: 1.3rem;
 }
@@ -605,7 +605,7 @@ body {
     font-family: var(--font-primary);
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
     margin-bottom: var(--spacing-sm);
 }
 
@@ -624,7 +624,7 @@ body {
 
 .achievements h3 {
     font-family: var(--font-primary);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
     margin-bottom: var(--spacing-md);
 }
 
@@ -687,7 +687,7 @@ body {
 
 .setting-group h3 {
     font-family: var(--font-primary);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
     margin-bottom: var(--spacing-md);
 }
 
@@ -707,12 +707,12 @@ body {
 .setting-item input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    accent-color: var(--accent-primary);
+    /* accent-color: var(--accent-primary); */
 }
 
 .setting-item input[type="range"] {
     width: 100px;
-    accent-color: var(--accent-primary);
+    /* accent-color: var(--accent-primary); */
 }
 
 .setting-item select {
@@ -756,7 +756,7 @@ body {
     font-family: var(--font-primary);
     font-size: 3rem;
     margin-bottom: var(--spacing-xl);
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .final-stats {
@@ -783,7 +783,7 @@ body {
     font-family: var(--font-primary);
     font-size: 3rem;
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .game-stats {
@@ -807,7 +807,7 @@ body {
 .stat-item span:last-child {
     font-family: var(--font-primary);
     font-weight: 700;
-    color: var(--accent-primary);
+    /* color: var(--accent-primary); */
 }
 
 .game-over-actions {
