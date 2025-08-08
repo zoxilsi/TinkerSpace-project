@@ -362,14 +362,26 @@ body {
 }
 
 .mapping-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
     margin-bottom: var(--spacing-md);
-    max-width: 800px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Rows to mimic QWERTY keyboard */
+.mapping-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+/* Offset rows: 2nd row slightly indented, 3rd row a bit more */
+.mapping-row.row-2 { padding-left: 24px; }
+.mapping-row.row-3 { padding-left: 48px; }
 
 .mapping-item {
     display: flex;
@@ -380,6 +392,9 @@ body {
     background: rgba(0, 0, 0, 0.3);
     border-radius: var(--radius-sm);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 72px;
+    height: 88px;
+    box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.06);
 }
 
 .mapping-key {
@@ -397,6 +412,24 @@ body {
     font-family: var(--font-primary);
     font-weight: 700;
     /* color: var(--accent-primary); */
+}
+
+/* Small visual tweak to center glyphs nicely */
+.mapping-key, .mapping-value {
+    letter-spacing: 0.02em;
+}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 768px) {
+    .mapping-row.row-2 { padding-left: 12px; }
+    .mapping-row.row-3 { padding-left: 24px; }
+    .mapping-item { width: 56px; height: 76px; }
+}
+
+@media (max-width: 480px) {
+    .mapping-row.row-2 { padding-left: 8px; }
+    .mapping-row.row-3 { padding-left: 16px; }
+    .mapping-item { width: 48px; height: 68px; }
 }
 
 #hide-mappings-btn {

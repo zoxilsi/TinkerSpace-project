@@ -109,20 +109,28 @@ function generateKeyMapping() {
 function displayKeyMappings() {
     const mappingGrid = document.getElementById('mapping-grid');
     mappingGrid.innerHTML = '';
-    
-    const allKeys = KEYBOARD_LAYOUT.flat();
-    
-    allKeys.forEach(key => {
-        const mappingItem = document.createElement('div');
-        mappingItem.className = 'mapping-item';
-        
-        mappingItem.innerHTML = `
-            <div class="mapping-key">${key}</div>
-            <div class="mapping-arrow">↓</div>
-            <div class="mapping-value">${gameState.keyMapping[key.toLowerCase()].toUpperCase()}</div>
-        `;
-        
-        mappingGrid.appendChild(mappingItem);
+
+    // Render rows to mimic a QWERTY keyboard layout with offsets
+    KEYBOARD_LAYOUT.forEach((rowKeys, index) => {
+        const row = document.createElement('div');
+        row.className = `mapping-row row-${index + 1}`;
+
+        rowKeys.forEach(key => {
+            const mappingItem = document.createElement('div');
+            mappingItem.className = 'mapping-item';
+            mappingItem.setAttribute('role', 'group');
+            mappingItem.setAttribute('aria-label', `Key ${key} maps to ${gameState.keyMapping[key.toLowerCase()].toUpperCase()}`);
+
+            mappingItem.innerHTML = `
+                <div class="mapping-key">${key}</div>
+                <div class="mapping-arrow">↓</div>
+                <div class="mapping-value">${gameState.keyMapping[key.toLowerCase()].toUpperCase()}</div>
+            `;
+
+            row.appendChild(mappingItem);
+        });
+
+        mappingGrid.appendChild(row);
     });
 }
 
